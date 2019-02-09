@@ -19,6 +19,7 @@
   },
   "permissions": [
     "<all_urls>",
+    "activeTab",
     "storage"
   ],
   "content_scripts": [
@@ -28,7 +29,11 @@
       ],
       "js": [
         "src/shared.js"
-      ]
+      ],
+      "css": [
+        "src/shared.css"
+      ],
+      "run_at": "document_end"
     }
   ],
   "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
