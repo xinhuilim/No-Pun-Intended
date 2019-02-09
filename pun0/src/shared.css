@@ -3,14 +3,14 @@
   background-color: #6CB4EE;
   z-index: 100000 !important;
   color: white;
-  pointer-events: none !important;
+  /* pointer-events: none !important; */
   border-radius: 10px;
 
   font-size: 24px;
 
-  padding: 8px;
+  padding: 4px;
 
-  margin-bottom: 10px;
+  margin-bottom: 24px;;
 
   margin-left: -8px;
 }

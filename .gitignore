@@ -1,0 +1,3 @@
+backend/lib/*
+backend/bin/*
+.DS_Store

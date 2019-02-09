@@ -23,7 +23,9 @@ for (var index = 0; index < inputs.length; ++index) {
 
   input.addEventListener('blur', function(e) {
     // kill bubble
-    deleteBubble(e.target)
+    setTimeout(function() {
+      deleteBubble(e.target)
+    }, 10)
   })
 
   /* input.addEventListener('input', function(e) {
@@ -85,16 +87,6 @@ function createBubble(elem) {
   bubbleDom.className = 'selection_bubble'
   elem.parentNode.appendChild(bubbleDom);
 
-  bubbleDom.addEventListener('click', async function(e) {
-    var selected = e.target.innerHTML
-    var allInput = elem.value
-
-    fetch('').then(function (response) {
-      return response.json()
-    }).then(function (jsonValue) {
-      console.log(jsonValue)
-    })
-  })
   return bubbleDom
 }
 
@@ -122,7 +114,8 @@ function getBubble(elem) {
 
 function updateBubble(bubble, event, text) {
   var elem = event.target
-  bubble.innerHTML = text
+  /* bubble.innerHTML = text */
+  bubble.innerHTML = 'Finding the punniest puns...'
   /* console.log(event)
    * console.log(bubble) */
 
@@ -152,6 +145,24 @@ function updateBubble(bubble, event, text) {
 
   /* console.log(elemSize.top - parentSize.top) */
   console.log(elemSize.left - parentSize.left)
+
+  updateBubbleText(bubble, event, text)
+}
+
+function updateBubbleText(bubble, event, text) {
+  var sentence = event.target.value
+  fetch('http://localhost:5000/pun?sentence=' + sentence + '&word=' + text)
+                      .then(function (resp) {
+                        return resp.json()
+                      })
+                      .then(function (json) {
+                        console.log(json)
+                        var suggestions = [...new Set(json.suggestions)]
+                        var filtered = suggestions.filter(function (s) {
+                          return s.length > 1
+                        })
+                        bubble.innerHTML = filtered.join(' ')
+                      })
 }
 
 // @author Rob W       http://stackoverflow.com/users/938089/rob-w
