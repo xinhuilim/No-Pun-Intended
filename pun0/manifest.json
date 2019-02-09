@@ -28,7 +28,7 @@
         "<all_urls>"
       ],
       "js": [
-        "src/shared.js"
+        "src/bubble.js"
       ],
       "css": [
         "src/shared.css"
