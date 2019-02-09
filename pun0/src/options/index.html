@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TimePrices - Settings</title>
+  <link rel="stylesheet" href="./../lib/pure-min.css">
+  <link rel="stylesheet" href="./../lib/grids-responsive-min.css">
+  <link rel="stylesheet" href="./../inject/time-prices.css">
+  <link rel="stylesheet" href="./options.css">
+</head>
+<body>
+
+<div id="layout" class="pure-g">
+  <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+      <img src="./../../icons/icon128.png">
+      <h1 class="brand-title">TimePrices</h1>
+      <nav class="side-nav nav-list">
+        <li class="active" tab-target="settings"><a>Settings</a></li>
+        <li tab-target="advanced"><a>Advanced settings</a></li>
+        <li tab-target="howto"><a>How to use</a></li>
+        <li tab-target="about"><a>About</a></li>
+      </nav>
+    </div>
+  </div>
+
+  <div class="content pure-u-1 pure-u-md-3-4">
+    <div>
+      <div class="posts" tab-id="settings">
+        <h1 class="content-subhead">Income Settings</h1>
+
+        <section class="post">
+          <div class="pure-g">
+            <div class="pure-u-2-3">
+              <p class="post-description">
+                Choose your currency and insert your income below. Empty fields will be filled automatically (on a basis of 5 working days a week, 8 hours a day).
+              </p>
+            </div>
+            <div class="pure-u-1-6">
+            </div>
+            <div class="pure-u-1-6">
+              <form class="pure-form pure-form-stacked">
+                <label>Example Profiles</label>
+                <select id="profiles" class="pure-input" style="width:100%;">
+                  <option value="empty" selected></option>
+                  <option value="barista">Starbucks Barista</option>
+                  <option value="office_manager">Office Manager</option>
+                  <option value="engineer">Software Engineer</option>
+                  <option value="trump">Trump</option>
+                </select>
+              </form>
+            </div>
+          </div>
+          <form id="settings-form" class="pure-form pure-form-aligned">
+            <div class="pure-g">
+              <div class="pure-u-1-2">
+                <h3 class="text-bold">Base Currency</h3>
+                <div class="pure-control-group">
+                  <select id="base_currency" name="base_currency">
+                    <option value="USD">USD ($)</option>
+                    <option value="EUR">EUR (€)</option>
+                    <option value="GBP">GBP (£)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="pure-g">
+              <div class="pure-u-1-2">
+                <h3 class="text-center text-bold">Hourly Rate (Before tax)</h3>
+                <div class="pure-control-group">
+                  <label>Hour</label>
+                  <input name="usd_per_hour" type="number" step="0.1">
+                </div>
+              </div>
+              <div class="pure-u-1-2">
+                <h3 class="text-center text-bold">Salary (Before tax)</h3>
+                <div class="pure-control-group">
+                  <label>Year</label>
+                  <input name="usd_per_year" type="number">
+                </div>
+                <div class="pure-control-group">
+                  <label>Month</label>
+                  <input name="usd_per_month" type="number">
+                </div>
+                <div class="pure-control-group">
+                  <label>Week</label>
+                  <input name="usd_per_week" type="number">
+                </div>
+                <div class="pure-control-group">
+                  <label>Day</label>
+                  <input name="usd_per_day" type="number">
+                </div>
+              </div>
+            </div>
+            <fieldset>
+              <div class="pure-controls">
+                <button type="submit" class="pure-button pure-button-primary">Save</button>
+                <span id="settings-save-success" class="success-icon hidden">&#10004; Saved</span>
+              </div>
+            </fieldset>
+          </form>
+          <div class="info-text">
+            <span class="text-bold">Note:</span> You can subtract your tax and other expenses and fill your net income instead to better reflect the true time it would take you to earn the displayed prices.
+          </div>
+        </section>
+      </div>
+
+      <div class="posts" tab-id="settings">
+        <h1 class="content-subhead">Currency Rates</h1>
+        <section class="post">
+          <p class="post-description">
+            These are the current exchange rates compared to 1 USD. They automatically update every 24 hours.
+          </p>
+          <div id="currencies-rates" class="pure-g hidden">
+            <div class="pure-u-1-3"><p>
+              1 EUR = <span id="rate-eur"></span>
+            </p></div>
+            <div class="pure-u-1-3"><p>
+              1 GBP = <span id="rate-gbp"></span>
+            </p></div>
+            <div class="pure-u-1-3"><p>
+              1 JPY = <span id="rate-jpy"></span>
+            </p></div>
+          </div>
+          <p id="currencies-lastcheck" class="hidden">
+            Last update: <span id="currencies-lastcheck-value"></span>
+          </p>
+          <button id="currencies-force-update" class="button-xsmall pure-button">Update now</button>
+        </div>
+        </section>
+      </div>
+
+      <div class="posts hidden" tab-id="advanced">
+        <section class="post">
+          <form id="advanced-settings-form" class="pure-form pure-form-stacked">
+            <fieldset>
+              <h1 class="content-subhead">Blacklist</h1>
+              <p class="post-description">
+                The extension will not load on the domains listed below. Insert each domain in a new line.
+              </p>
+              <p class="post-description">
+                Each line is compared to the end of the domain, meaning "gle.com" will also match "google.com" and "mail.google.com". You can use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank">Regular-Expressions</a>, but notice that dots ('.') will be escaped automatically.
+              </p>
+              <textarea id="domains-blacklist" class="pure-input-1-2" rows="8"></textarea>
+            </fieldset>
+            <fieldset>
+              <h1 class="content-subhead">Whitelist</h1>
+              <p class="post-description">
+                If not left empty, the extension will load <em><strong>only</strong></em> on the domains listed below. Insert each domain in a new line, like the blacklist.
+              </p>
+              <textarea id="domains-whitelist" class="pure-input-1-2" rows="8"></textarea>
+            </fieldset>
+            <fieldset>
+              <h1 class="content-subhead">Usage Statistics</h1>
+              <p class="post-description">
+                Knowing how people use this extension helps ensuring that everything works as it supposed to. If opted-in, the extension will not send any personal data (including settings data). Your browser details and your usage of TimePrices will be sent using <a href="https://support.google.com/analytics/answer/6004245" target="_blank">Google Analytics</a>.
+              </p>
+              <label class="pure-checkbox">
+                <input id="usage-statistics" type="checkbox"> Send anonymous usage statistics<span class="success-icon hidden"> Thank you!</span>
+              </label>
+            </fieldset>
+            <button type="submit" class="pure-button button-xsmall pure-button-primary">Save</button>
+            <span id="settings-advanced-save-success" class="success-icon hidden">&#10004; Saved</span>
+          </form>
+        </section>
+      </div>
+
+      <div class="posts hidden" tab-id="howto">
+        <h1 class="content-subhead">How To Use</h1>
+        <section class="post">
+          <p class="post-description">
+            Insert your income in the settings, then browse to any site and hover with your cursor over a price. A small tooltip will show the time it will take you to earn that amount of money. Try these:
+          </p>
+          <div class="pure-g">
+            <div class="pure-u-1-5"><p>$0.10</p></div>
+            <div class="pure-u-1-5"><p>$12</p></div>
+            <div class="pure-u-1-5"><p>£12</p></div>
+            <div class="pure-u-1-5"><p>$1.5K</p></div>
+            <div class="pure-u-1-5"><p>$20M</p></div>
+        </div>
+        </section>
+      </div>
+
+      <div class="posts hidden" tab-id="about">
+        <h1 class="content-subhead">Report bugs & Feature requests</h1>
+        <section class="post">
+          <p class="post-description">
+            Ask for features and report bugs on the <a href="https://github.com/guyb7/time-prices/issues" target="_blank">GitHub</a> page!
+          </p>
+        </section>
+      </div>
+
+      <div class="posts hidden" tab-id="about">
+        <h1 class="content-subhead">Who made this?</h1>
+        <section class="post">
+          <p class="post-description">
+            I'm Guy and I do web development for a living. This tool is open source and hosted on <a href="https://github.com/guyb7/time-prices" target="_blank">GitHub</a>. You can email me at <a href="mailto:guy.br7@gmail.com">guy.br7@gmail.com</a>.
+          </p>
+          <div class="post-description">
+            If you found this useful (or amusing!), I will appreciate a cup of coffee (: 
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="display: inline-block; position: relative; top: 8px;">
+              <input type="hidden" name="cmd" value="_s-xclick">
+              <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+              ">
+              <input type="image" src="./img/coffee.svg" height="24" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+            </form>
+          </div>
+
+        </section>
+      </div>
+
+      <div class="footer">
+        <div class="pure-menu pure-menu-horizontal">
+          <ul>
+            <li class="pure-menu-item"><a href="https://guyb7.github.io/time-prices/" target="_blank" class="pure-menu-link">Website</a></li>
+            <li class="pure-menu-item"><a href="https://github.com/guyb7/time-prices" target="_blank" class="pure-menu-link">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./../shared.js"></script>
+<script src="./../inject/time-prices.js"></script>
+<script src="./options.js"></script>
+
+</body>
+</html>
